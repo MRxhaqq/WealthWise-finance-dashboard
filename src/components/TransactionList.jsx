@@ -29,7 +29,6 @@ function TransactionRow({ transaction, index }) {
       dispatch({ type: "DELETE", payload: transaction.id });
     } else {
       setConfirmDelete(true);
-      // Auto-cancel confirm after 3 seconds
       setTimeout(() => setConfirmDelete(false), 3000);
     }
   };
@@ -41,13 +40,13 @@ function TransactionRow({ transaction, index }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -20 }}
       transition={{ duration: 0.2, delay: index * 0.03 }}
-      className="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-50 dark:hover:bg-dark-700/50 transition-colors group"
+      className="flex items-start gap-3 p-4 rounded-xl hover:bg-surface-50 dark:hover:bg-dark-700/50 transition-colors group"
     >
       {/* Type indicator */}
       <div
         className={`
-        w-10 h-10 rounded-xl flex items-center justify-center
-        text-lg font-bold flex-shrink-0
+        w-9 h-9 rounded-xl flex items-center justify-center
+        text-base font-bold flex-shrink-0 mt-0.5
         ${
           transaction.type === "income"
             ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
@@ -60,13 +59,24 @@ function TransactionRow({ transaction, index }) {
         {TYPE_ICON[transaction.type]}
       </div>
 
-      {/* Title + date */}
+      {/* Main content — takes all remaining space */}
       <div className="flex-1 min-w-0">
-        <p className="text-slate-800 dark:text-white font-medium text-sm truncate">
-          {transaction.title}
-        </p>
-        <div className="flex items-center gap-2 mt-0.5">
-          <p className="text-slate-400 dark:text-slate-500 text-xs">
+        {/* Top row — title + amount */}
+        <div className="flex items-start justify-between gap-2">
+          <p className="text-slate-800 dark:text-white font-medium text-sm truncate flex-1">
+            {transaction.title}
+          </p>
+          <p
+            className={`font-bold text-sm flex-shrink-0 ${TYPE_AMOUNT_COLOR[transaction.type]}`}
+          >
+            {TYPE_ICON[transaction.type]}
+            {formatCurrency(transaction.amount)}
+          </p>
+        </div>
+
+        {/* Bottom row — date + badge */}
+        <div className="flex items-center gap-2 mt-1 flex-wrap">
+          <p className="text-slate-400 dark:text-slate-500 text-xs flex-shrink-0">
             {formatDate(transaction.date)}
           </p>
           <CategoryBadge
@@ -74,24 +84,16 @@ function TransactionRow({ transaction, index }) {
             category={transaction.category}
           />
         </div>
-      </div>
 
-      {/* Amount */}
-      <div className="text-right flex-shrink-0">
-        <p
-          className={`font-bold text-sm ${TYPE_AMOUNT_COLOR[transaction.type]}`}
-        >
-          {TYPE_ICON[transaction.type]}
-          {formatCurrency(transaction.amount)}
-        </p>
+        {/* Note — only shows if present, on its own line */}
         {transaction.note && (
-          <p className="text-slate-400 dark:text-slate-500 text-xs truncate max-w-[120px]">
+          <p className="text-slate-400 dark:text-slate-500 text-xs mt-1 truncate">
             {transaction.note}
           </p>
         )}
       </div>
 
-      {/* Action buttons — visible on hover */}
+      {/* Action buttons */}
       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
         <button
           onClick={() => openEditModal(transaction)}
