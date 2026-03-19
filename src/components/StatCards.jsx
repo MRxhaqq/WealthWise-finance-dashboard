@@ -80,32 +80,62 @@ function StatCard({ config, value, index }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.08 }}
-      className="bg-white dark:bg-dark-800 border border-surface-200 dark:border-dark-600 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200"
+      className="bg-white dark:bg-dark-800 border border-surface-200 dark:border-dark-600 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow duration-200"
     >
-      <div className="flex items-start justify-between mb-4">
+      {/* Icon row */}
+      <div className="flex items-center justify-between mb-3">
         <div
-          className={`w-10 h-10 rounded-xl ${config.iconBg} flex items-center justify-center`}
+          className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl ${config.iconBg} flex items-center justify-center flex-shrink-0`}
         >
-          <Icon size={18} className={config.iconColor} />
+          <Icon size={16} className={config.iconColor} />
         </div>
+
+        {/* Badge — hidden on very small screens, shown from sm up */}
         {config.trend && (
           <span
-            className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+            className={`
+            hidden sm:inline-flex items-center
+            text-xs font-semibold px-2 py-0.5 rounded-full
+            ${
               config.trend === "up"
                 ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
                 : "bg-red-500/10 text-red-600 dark:text-red-400"
-            }`}
+            }
+          `}
           >
             {config.trend === "up" ? "↑" : "↓"} This month
           </span>
         )}
       </div>
+
+      {/* Label */}
       <p className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">
         {config.label}
       </p>
-      <p className={`text-2xl font-bold tracking-tight ${config.valueColor}`}>
+
+      {/* Value */}
+      <p
+        className={`text-xl sm:text-2xl font-bold tracking-tight ${config.valueColor}`}
+      >
         <AnimatedCounter value={value} />
       </p>
+
+      {/* Trend badge — only shows on mobile where it was hidden above */}
+      {config.trend && (
+        <span
+          className={`
+          sm:hidden inline-flex items-center mt-2
+          text-xs font-semibold px-2 py-0.5 rounded-full
+          ${
+            config.trend === "up"
+              ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+              : "bg-red-500/10 text-red-600 dark:text-red-400"
+          }
+        `}
+        >
+          {config.trend === "up" ? "↑" : "↓"} This month
+        </span>
+      )}
     </motion.div>
   );
 }
