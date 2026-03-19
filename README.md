@@ -6,7 +6,7 @@ management, and light/dark mode — all data saved locally to your browser.
 
 ## Live Demo
 
-[View live on Vercel](https://your-deployment-url.vercel.app)
+[View live on Vercel](https://wealth-wise-finance-dashboard.vercel.app/)
 
 ## Features
 
@@ -42,7 +42,7 @@ management, and light/dark mode — all data saved locally to your browser.
 1. Clone the repository
 
 ```bash
-   git clone https://github.com/YOUR_USERNAME/wealthwise.git
+   git clone https://github.com/MRxhaqq/WealthWise-finance-dashboard.git
    cd wealthwise
 ```
 

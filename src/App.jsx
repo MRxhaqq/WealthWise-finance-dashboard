@@ -8,7 +8,6 @@ import BarChart from "./components/BarChart";
 import DonutChart from "./components/DonutChart";
 import TransactionList from "./components/TransactionList";
 import TransactionModal from "./components/TransactionModal";
-import Footer from "./components/Footer";
 import { formatCurrency } from "./lib/utils";
 
 const pageVariants = {
@@ -376,8 +375,6 @@ function Dashboard() {
             <TabContent activeTab={activeTab} />
           </div>
         </main>
-
-        <Footer />
       </div>
 
       <TransactionModal />
