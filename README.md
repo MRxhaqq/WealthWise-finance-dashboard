@@ -4,6 +4,20 @@ A premium personal finance dashboard built with React, Tailwind CSS, and Chart.j
 Track income, expenses, and savings with beautiful charts, full CRUD transaction
 management, and light/dark mode — all data saved locally to your browser.
 
+## Screenshots
+
+### Overview Tab
+
+![Overview Tab](screenshots/wealthwise-overview-tab.png)
+
+### Transction Tab
+
+![Transaction Tab](screenshots/wealthwise-transaction-tab.png)
+
+### Analytics Tab
+
+![Analytics Tab](screenshots/wealthwise-analytics-tab.png)
+
 ## Live Demo
 
 [View live on Vercel](https://wealth-wise-finance-dashboard.vercel.app/)
